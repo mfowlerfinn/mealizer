@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(3),
     textAlign: 'center',
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: theme.palette.background,
     color: theme.palette.text.primary,
   },
 }));
@@ -32,7 +32,7 @@ function App() {
     // We keep the theme in app state
     const [theme, setTheme] = useState({
       palette: {
-        type: "dark"
+        type: "light"
       }
     });
 

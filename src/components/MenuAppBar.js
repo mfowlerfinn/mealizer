@@ -88,7 +88,7 @@ export default function MenuAppBar({onToggleDark}) {
             <MenuItem onClick={handleClose}>Recent Meal Plans</MenuItem>
             <MenuItem onClick={handleClose}>Grocery List</MenuItem>
             <MenuItem onClick={handleClose}>Recipes</MenuItem>
-            <MenuItem onClick={onToggleDark}>Preferences</MenuItem>
+            <MenuItem onClick={onToggleDark}>Dark Mode</MenuItem>
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
             
           </Menu>

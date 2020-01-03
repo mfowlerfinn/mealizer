@@ -55,8 +55,12 @@ function App() {
           <Route exact path="/">
             <SignIn home={home}/>
           </Route>
+          <Route exact path="/menu">
+            <MenuAppBar onToggleDark={toggleDarkTheme} title={"Planned Meals"}/>
+            <Menu />
+          </Route>
           <Route path={home}>
-            <MenuAppBar onToggleDark={toggleDarkTheme}/>
+            <MenuAppBar onToggleDark={toggleDarkTheme} title={"Mealize your week!"}/>
             <CompileMenu />
           </Route>
         </Switch>

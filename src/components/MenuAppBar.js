@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function MenuAppBar({onToggleDark}) {
+export default function MenuAppBar({onToggleDark, title}) {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -47,6 +47,26 @@ export default function MenuAppBar({onToggleDark}) {
     window.location.href = "/";
   };
 
+  const routePlanMeals = () => {
+    setAnchorEl(null);
+    window.location.href = "/compile";
+  };
+
+  const routeMealPlans = () => {
+    setAnchorEl(null);
+    window.location.href = "/menu";
+  };
+
+  const routeGrocery = () => {
+    setAnchorEl(null);
+    window.location.href = "/groceries";
+  };
+
+  const routeRecipe = () => {
+    setAnchorEl(null);
+    window.location.href = "/recipes";
+  };
+
   return (
     <div className={classes.root}>
       {/* <FormGroup>
@@ -58,7 +78,7 @@ export default function MenuAppBar({onToggleDark}) {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            Mealizer
+            {title}
           </Typography>
           <IconButton
             aria-label="menu"
@@ -84,10 +104,10 @@ export default function MenuAppBar({onToggleDark}) {
             open={open}
             onClose={handleClose}
           >
-            <MenuItem onClick={handleClose}>Plan Meals</MenuItem>
-            <MenuItem onClick={handleClose}>Recent Meal Plans</MenuItem>
-            <MenuItem onClick={handleClose}>Grocery List</MenuItem>
-            <MenuItem onClick={handleClose}>Recipes</MenuItem>
+            <MenuItem onClick={routePlanMeals}>Plan Meals</MenuItem>
+            <MenuItem onClick={routeMealPlans}>Recent Meal Plans</MenuItem>
+            <MenuItem onClick={routeGrocery}>Grocery List</MenuItem>
+            <MenuItem onClick={routeRecipe}>Recipes</MenuItem>
             <MenuItem onClick={onToggleDark}>Dark Mode</MenuItem>
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
             

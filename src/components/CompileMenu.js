@@ -77,6 +77,7 @@ export default function CompileMenu() {
   let recipeCards = [];
   let days = 7;
   let startDay;
+  let servings = 2;
   // setDefaultState(day, days);
 
   const [checked, setChecked] = useState();

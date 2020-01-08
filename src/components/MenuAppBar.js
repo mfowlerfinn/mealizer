@@ -64,7 +64,7 @@ export default function MenuAppBar({onToggleDark, title}) {
 
   const routeRecipe = () => {
     setAnchorEl(null);
-    window.location.href = "/recipes";
+    window.location.href = "/recipe";
   };
 
   return (

@@ -4,6 +4,7 @@ import Menu from "./components/Menu";
 import SignIn from "./components/SignIn";
 import MenuAppBar from "./components/MenuAppBar";
 import CompileMenu from "./components/CompileMenu";
+import Recipe from "./components/recipe";
 import {
   BrowserRouter as Router,
   Switch,
@@ -57,6 +58,10 @@ function App() {
           </Route>
           <Route exact path="/menu">
             <MenuAppBar onToggleDark={toggleDarkTheme} title={"Planned Meals"}/>
+            <Menu />
+          </Route>
+          <Route exact path="/recipe">
+            <MenuAppBar onToggleDark={toggleDarkTheme} title={"Recipe"}/>
             <Menu />
           </Route>
           <Route path={home}>

@@ -1,12 +1,15 @@
-import React from 'react'
+import React from 'react';
+import RecipeList from './recipeList';
 
 
 
 export default function recipe() {
+
+
   return (
     <div>
-      
-<div class="photo">
+      <RecipeList />
+{/* <div class="photo">
   <img
     class="photowithborder"
     src="https://media.blueapron.com/recipes/2598/square_newsletter_images/1507909172-1-0002-9305/1113_2PM_Beef-Tacos_91010_WEB_SQ_hi_res.jpg"
@@ -24,49 +27,6 @@ export default function recipe() {
     target="_blank"
     >www.blueapron.com</a
   >
-</div>
-
-<div class="rating">
-  <img
-    class="starimg"
-    src="star_empty_webview.png"
-    width="18"
-    height="18"
-    border="0"
-    align="left"
-  />
-  <img
-    class="starimg"
-    src="star_empty_webview.png"
-    width="18"
-    height="18"
-    border="0"
-    align="left"
-  />
-  <img
-    class="starimg"
-    src="star_empty_webview.png"
-    width="18"
-    height="18"
-    border="0"
-    align="left"
-  />
-  <img
-    class="starimg"
-    src="star_empty_webview.png"
-    width="18"
-    height="18"
-    border="0"
-    align="left"
-  />
-  <img
-    class="starimg"
-    src="star_empty_webview.png"
-    width="18"
-    height="18"
-    border="0"
-    align="left"
-  />
 </div>
 
 <div class="info">
@@ -180,7 +140,7 @@ export default function recipe() {
   among the warmed tortillas. Top with the marinated radishes (draining before
   adding) and lime sour cream. Garnish with the green tops of the scallions.
   Divide the tacos and finished sweet potato between 2 dishes. Enjoy!
-</div>
+</div> */}
 
 </div>
   )

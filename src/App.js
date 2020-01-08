@@ -51,26 +51,23 @@ function App() {
 
   return (
     <ThemeProvider theme={muiTheme}>
+    <MenuAppBar onToggleDark={toggleDarkTheme} title={"Recipe"}/>
     <Router>
+       
       <Switch>
           <Route exact path="/">
-            <SignIn home={home}/>
+            <CompileMenu />
           </Route>
           <Route exact path="/menu">
-            <MenuAppBar onToggleDark={toggleDarkTheme} title={"Planned Meals"}/>
             <Menu />
           </Route>
           <Route exact path="/recipe">
-            <MenuAppBar onToggleDark={toggleDarkTheme} title={"Recipe"}/>
-            <Menu />
-          </Route>
-          <Route path={home}>
-            <MenuAppBar onToggleDark={toggleDarkTheme} title={"Mealize your week!"}/>
-            <CompileMenu />
+            <Recipe />
           </Route>
         </Switch>
 
     </Router>
+    
     </ThemeProvider>
   );
 }

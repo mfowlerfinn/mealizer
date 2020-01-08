@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function MenuAppBar({onToggleDark, title}) {
+export default function MenuAppBar({ onToggleDark, title }) {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -47,24 +47,9 @@ export default function MenuAppBar({onToggleDark, title}) {
     window.location.href = "/";
   };
 
-  const routePlanMeals = () => {
+  const handleRoute = route => {
     setAnchorEl(null);
-    window.location.href = "/compile";
-  };
-
-  const routeMealPlans = () => {
-    setAnchorEl(null);
-    window.location.href = "/menu";
-  };
-
-  const routeGrocery = () => {
-    setAnchorEl(null);
-    window.location.href = "/groceries";
-  };
-
-  const routeRecipe = () => {
-    setAnchorEl(null);
-    window.location.href = "/recipe";
+    window.location.href = route;
   };
 
   return (
@@ -104,13 +89,16 @@ export default function MenuAppBar({onToggleDark, title}) {
             open={open}
             onClose={handleClose}
           >
-            <MenuItem onClick={routePlanMeals}>Plan Meals</MenuItem>
-            <MenuItem onClick={routeMealPlans}>Recent Meal Plans</MenuItem>
-            <MenuItem onClick={routeGrocery}>Grocery List</MenuItem>
-            <MenuItem onClick={routeRecipe}>Recipes</MenuItem>
+            <MenuItem onClick={() => handleRoute("/")}>Plan Meals</MenuItem>
+            <MenuItem onClick={() => handleRoute("/recent-meal-plans")}>
+              Recent Meal Plans
+            </MenuItem>
+            <MenuItem onClick={() => handleRoute("/groceries")}>
+              Grocery List
+            </MenuItem>
+            <MenuItem onClick={() => handleRoute("/recipe")}>Recipes</MenuItem>
             <MenuItem onClick={onToggleDark}>Dark Mode</MenuItem>
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
-            
           </Menu>
         </Toolbar>
       </AppBar>

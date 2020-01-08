@@ -2,8 +2,7 @@ import React, {
   Fragment,
   useState,
   useEffect,
-  useRef,
-  componentDidMount
+  useRef
 } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";

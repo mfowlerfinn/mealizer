@@ -1,9 +1,5 @@
-import React, {
-  Fragment,
-  useState,
-  useEffect,
-  useRef
-} from "react";
+import React, { Fragment, useState, useEffect } from "react";
+import { useGlobalState } from "./LocalState";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -12,6 +8,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Checkbox from "@material-ui/core/Checkbox";
 import { FormControlLabel } from "@material-ui/core";
+import Data from "../static/data.json";
 
 //get options previously selected... allow set to "default for user"
 //show options to compile menu but deprioritize them (opt-in)
@@ -55,82 +52,111 @@ const weekday = [
   "Saturday"
 ];
 
-function setDefaultState(day, days) {
-  let storeObj = {};
-  for (let i = 0; i < days; i++) {
-    let key = day + i;
-    // console.log(key);
-    storeObj[key] = true;
-  }
-  // console.log(storeObj);
-  return storeObj;
-}
-
 export default function CompileMenu() {
+  const {
+    options,
+    setOptions,
+    menu,
+    setMenu,
+    activeDays,
+    setActiveDays
+  } = useGlobalState();
+
   const handleChange = e => {
-    setChecked({ ...checked, [e.target.name]: e.target.checked });
+    setActiveDays({ ...activeDays, [e.target.name]: e.target.checked });
   };
 
-  let day = new Date().getDay();
-  let dayString = weekday[day];
-  let recipeCards = [];
-  let days = 7;
-  let startDay;
-  let servings = 2;
-  // setDefaultState(day, days);
-
-  const [checked, setChecked] = useState();
-  const classes = useStyles();
-
-  useEffect(() => {
-    // console.log(checked);
-  }, [checked]);
-
-  useEffect(() => {
-    //runs once since empty array, acts like componentDidMount
-    setChecked(setDefaultState(day, days));
-  }, []);
-
-  for (let i = 0; i < days; i++) {
-    let dayKey = day + i;
-    let dayNum = dayKey % 7;
-    dayString = weekday[dayNum];
-    // console.log({dayNum, dayString});
-
-    recipeCards.push(
-      <Card key={dayKey} className={classes.card}>
-        <CardContent className={classes.content}>
-          <FormControlLabel
-            control={
-              <Checkbox
-                defaultChecked
-                name={`${dayKey}`}
-                color="primary"
-                onChange={handleChange}
-              />
-            }
-            label={dayString}
-          />
-          <div className={checked && checked[dayKey] ? null : classes.hide}>
-            {/* {(checked) && (checked[dayKey]) ? null : display: none} */}
-            <Typography variant="h6" component="h2">
-              meal title
-            </Typography>
-            <Typography className={classes.pos} color="textSecondary">
-              w/ some side(s)
-            </Typography>
-            <Typography variant="body2" component="p">
-              brief description of meal
-            </Typography>
-            <Typography color="textSecondary">estimated time</Typography>
-          </div>
-        </CardContent>
-        {/* <CardActions>
-              <Button size="small">Learn More</Button>
-            </CardActions> */}
-      </Card>
-    );
+  function getRandomIndex(n) {
+    // setMenu([]);
+    let arr = [];
+    for (let i = 0; i < n; i++) {
+      let len = Data.recipes.length;
+      let randomIndex = Math.round(Math.random() * len);
+      arr.push(randomIndex);
+    }
+    setMenu(arr);
   }
 
-  return <Fragment>{recipeCards}</Fragment>;
+
+
+
+
+  // let day = new Date().getDay();
+  let day = options.startDay;
+  let dayString = weekday[day];
+  let recipeCards = [];
+  let days = options.days;
+  let servings = options.servings;
+  // setDefaultState(day, days);
+
+  const classes = useStyles();
+
+  const Cards = () => {
+    recipeCards = [];
+    if(!menu[1]) getRandomIndex(options.days);
+    for (let i = 0; i < days; i++) {
+      let dayKey = day + i;
+      let dayNum = dayKey % 7;
+      dayString = weekday[dayNum];
+      let index = menu[i] ? menu[i] : 0;
+      let title = Data.recipes[index].title;
+      let subtitle = Data.recipes[index].subtitle;
+      let description = Data.recipes[index].description;
+      // console.log({dayNum, dayString});
+
+      // jsx.push(
+      //   <div>
+      //     <h1>{Data.recipes[randomIndex].title}</h1>
+      //     <h3>{`index ${randomIndex}`}</h3>
+      //   </div>
+      //   );
+      //   recipesSelected.push(randomIndex);
+
+      recipeCards.push(
+        <Card key={dayKey} className={classes.card}>
+          <CardContent className={classes.content}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={activeDays[dayKey] ? true : false}
+                  name={`${dayKey}`}
+                  color="primary"
+                  onChange={handleChange}
+                />
+              }
+              label={dayString}
+            />
+            <div className={activeDays[dayKey] ? null : classes.hide}>
+              {/* {(checked) && (checked[dayKey]) ? null : display: none} */}
+              <Typography variant="h6" component="h2">
+                {title}
+              </Typography>
+              <Typography className={classes.pos} color="textSecondary">
+                {subtitle}
+              </Typography>
+              <Typography variant="body2" component="p">
+                {description}
+              </Typography>
+              {/* <Typography color="textSecondary">estimated time</Typography> */}
+            </div>
+          </CardContent>
+          {/* <CardActions>
+              <Button size="small">Learn More</Button>
+            </CardActions> */}
+        </Card>
+      );
+    }
+    return recipeCards;
+  };
+
+  useEffect(() => {
+    Cards();
+  }, [menu]);
+
+  return (
+    <Fragment>
+      <Button onClick={() => getRandomIndex(options.days)}>Shuffle</Button>
+      {Cards()}
+    </Fragment>
+  );
 }

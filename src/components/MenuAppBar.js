@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function MenuAppBar({ onToggleDark, title }) {
+export default function MenuAppBar({ title }) {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -97,7 +97,6 @@ export default function MenuAppBar({ onToggleDark, title }) {
               Grocery List
             </MenuItem>
             <MenuItem onClick={() => handleRoute("/recipe")}>Recipes</MenuItem>
-            <MenuItem onClick={onToggleDark}>Dark Mode</MenuItem>
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </Menu>
         </Toolbar>

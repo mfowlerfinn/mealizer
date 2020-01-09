@@ -52,6 +52,8 @@ const weekday = [
   "Saturday"
 ];
 
+let isStoredLocal = false;
+
 export default function CompileMenu() {
   const {
     options,
@@ -59,7 +61,9 @@ export default function CompileMenu() {
     menu,
     setMenu,
     activeDays,
-    setActiveDays
+    setActiveDays,
+    finalMenu,
+    setFinalMenu
   } = useGlobalState();
 
   const handleChange = e => {
@@ -77,85 +81,156 @@ export default function CompileMenu() {
     setMenu(arr);
   }
 
+  const setMenuObject = () => {
+    let final = menu.map(val => Data.recipes[val]);
+    setFinalMenu(final);
+    let local = JSON.stringify(final);
+    localStorage.setItem("final", local);
+    console.log(final);
+  };
 
+  useEffect(() => {
+    console.log(finalMenu);
+  }, [finalMenu]);
 
-
-
-  // let day = new Date().getDay();
   let day = options.startDay;
-  let dayString = weekday[day];
   let recipeCards = [];
   let days = options.days;
   let servings = options.servings;
-  // setDefaultState(day, days);
 
   const classes = useStyles();
 
   const Cards = () => {
     recipeCards = [];
-    if(!menu[1]) getRandomIndex(options.days);
-    for (let i = 0; i < days; i++) {
-      let dayKey = day + i;
-      let dayNum = dayKey % 7;
-      dayString = weekday[dayNum];
-      let index = menu[i] ? menu[i] : 0;
-      let title = Data.recipes[index].title;
-      let subtitle = Data.recipes[index].subtitle;
-      let description = Data.recipes[index].description;
-      // console.log({dayNum, dayString});
+    if (menu.length > 1) {
+      for (let i = 0; i < menu.length; i++) {
+        let dayKey = day + i;
+        let dayNum = dayKey % 7;
+        let dayString = weekday[dayNum];
+        let index = menu[i];
+        let title = Data.recipes[index].title;
+        let subtitle = Data.recipes[index].subtitle;
+        let description = Data.recipes[index].description;
 
-      // jsx.push(
-      //   <div>
-      //     <h1>{Data.recipes[randomIndex].title}</h1>
-      //     <h3>{`index ${randomIndex}`}</h3>
-      //   </div>
-      //   );
-      //   recipesSelected.push(randomIndex);
-
-      recipeCards.push(
-        <Card key={dayKey} className={classes.card}>
-          <CardContent className={classes.content}>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={activeDays[dayKey] ? true : false}
-                  name={`${dayKey}`}
-                  color="primary"
-                  onChange={handleChange}
-                />
-              }
-              label={dayString}
-            />
-            <div className={activeDays[dayKey] ? null : classes.hide}>
-              {/* {(checked) && (checked[dayKey]) ? null : display: none} */}
-              <Typography variant="h6" component="h2">
-                {title}
-              </Typography>
-              <Typography className={classes.pos} color="textSecondary">
-                {subtitle}
-              </Typography>
-              <Typography variant="body2" component="p">
-                {description}
-              </Typography>
-              {/* <Typography color="textSecondary">estimated time</Typography> */}
-            </div>
-          </CardContent>
-          {/* <CardActions>
+        recipeCards.push(
+          <Card key={dayKey} className={classes.card}>
+            <CardContent className={classes.content}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={activeDays[dayKey] ? true : false}
+                    name={`${dayKey}`}
+                    color="primary"
+                    onChange={handleChange}
+                  />
+                }
+                label={dayString}
+              />
+              <div className={activeDays[dayKey] ? null : classes.hide}>
+                {/* {(checked) && (checked[dayKey]) ? null : display: none} */}
+                <Typography variant="h6" component="h2">
+                  {title}
+                </Typography>
+                <Typography className={classes.pos} color="textSecondary">
+                  {subtitle}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  {description}
+                </Typography>
+                {/* <Typography color="textSecondary">estimated time</Typography> */}
+              </div>
+            </CardContent>
+            {/* <CardActions>
               <Button size="small">Learn More</Button>
             </CardActions> */}
-        </Card>
-      );
+          </Card>
+        );
+      }
     }
     return recipeCards;
   };
 
+  // const CardConstructor = () => {
+  //   return (
+  //     <div>
+  //       {menu.map((meal, index) => {
+  //         console.log({ meal, index });
+  //         let dayKey = index;
+  //         let dayNum = dayKey % 7;
+  //         dayString = weekday[dayNum];
+  //         let title = Data.recipes[index].title;
+  //         let subtitle = Data.recipes[index].subtitle;
+  //         let description = Data.recipes[index].description;
+  //         return (
+  //           <Card key={dayKey} className={classes.card}>
+  //             <CardContent className={classes.content}>
+  //               <FormControlLabel
+  //                 control={
+  //                   <Checkbox
+  //                     checked={activeDays[dayKey] ? true : false}
+  //                     name={`${dayKey}`}
+  //                     color="primary"
+  //                     onChange={handleChange}
+  //                   />
+  //                 }
+  //                 label={dayString}
+  //               />
+  //               <div className={activeDays[dayKey] ? null : classes.hide}>
+  //                 {/* {(checked) && (checked[dayKey]) ? null : display: none} */}
+  //                 <Typography variant="h6" component="h2">
+  //                   {title}
+  //                 </Typography>
+  //                 <Typography className={classes.pos} color="textSecondary">
+  //                   {subtitle}
+  //                 </Typography>
+  //                 <Typography variant="body2" component="p">
+  //                   {description}
+  //                 </Typography>
+  //                 {/* <Typography color="textSecondary">estimated time</Typography> */}
+  //               </div>
+  //             </CardContent>
+  //             {/* <CardActions>
+  //             <Button size="small">Learn More</Button>
+  //           </CardActions> */}
+  //           </Card>
+  //         );
+  //       })}
+  //     </div>
+  //   );
+  // };
+
+  function handleLocal() {
+    localStorage.setItem("menu", menu);
+  }
+
+  function restoreLocal() {
+    if (localStorage.getItem("menu")) {
+      let storedMenu = localStorage.getItem("menu");
+      let arr = storedMenu.split(",");
+      let storedMenuIndex = arr.map(val => parseInt(val));
+      setMenu(storedMenuIndex);
+      isStoredLocal = true;
+    } else {
+      getRandomIndex(options.days);
+      isStoredLocal = false;
+    }
+  }
+
   useEffect(() => {
     Cards();
+    // console.log(menu)
+    setMenuObject();
   }, [menu]);
+
+  useEffect(() => {
+    restoreLocal();
+  }, []);
 
   return (
     <Fragment>
       <Button onClick={() => getRandomIndex(options.days)}>Shuffle</Button>
+      <Button onClick={handleLocal}>Store</Button>
+      <Button onClick={restoreLocal}>Restore</Button>
       {Cards()}
     </Fragment>
   );

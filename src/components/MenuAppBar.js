@@ -90,9 +90,7 @@ export default function MenuAppBar({ title }) {
             onClose={handleClose}
           >
             <MenuItem onClick={() => handleRoute("/")}>Plan Meals</MenuItem>
-            <MenuItem onClick={() => handleRoute("/recent-meal-plans")}>
-              Recent Meal Plans
-            </MenuItem>
+            <MenuItem onClick={() => handleRoute("/menu")}>Menu</MenuItem>
             <MenuItem onClick={() => handleRoute("/groceries")}>
               Grocery List
             </MenuItem>

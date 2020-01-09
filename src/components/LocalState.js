@@ -20,10 +20,11 @@ const menuStructure = [];
 function StateProvider({ children }) {
   const [options, setOptions] = useState(dataStructure);
   const [menu, setMenu] = useState(menuStructure);
+  const [finalMenu, setFinalMenu] = useState(menuStructure);
   const [activeDays, setActiveDays] = useState(days);
 
   return (
-    <LocalStateProvider value={{ options, setOptions, menu, setMenu, activeDays, setActiveDays }}>
+    <LocalStateProvider value={{ options, setOptions, menu, setMenu, activeDays, setActiveDays, finalMenu, setFinalMenu }}>
       {children}
     </LocalStateProvider>
   );

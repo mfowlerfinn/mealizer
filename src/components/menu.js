@@ -1,35 +1,52 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
+import { useGlobalState } from "./LocalState";
 
-let plannedMeals = true;
+let plannedMeals = false;
+let meals = [];
+
+const getLocal = () => {
+  let item = "final";
+  if (localStorage.getItem(item)) {
+    let storedString = localStorage.getItem(item);
+    meals = JSON.parse(storedString);
+    // console.log(meals);
+    plannedMeals = true;
+    // return storedArray;
+  } else {
+    plannedMeals = false;
+  }
+};
 
 //get compiled menu from state or database?
 
-function getMenu() {
-  if (plannedMeals) {
-    return (
-      <Fragment>
-        <h1>MENU</h1>
-        <ul>
-          <li>
-            today
+const GetMenu = () => {
+  getLocal();
+  return (
+    <Fragment>
+      {meals.map((meal, i) => {
+        return (
+          <div key={i}>
+            <h1>{meal.title}</h1>
             <ul>
-              <li>dinner</li>
+              <li>{meal.subtitle}</li>
             </ul>
-          </li>
-          <li>tomorrow</li>
-        </ul>
-      </Fragment>
-    );
-  } else {
-    return <h2>Menu not yet planned</h2>;
-  }
-}
+          </div>
+        );
+      })}
+    </Fragment>
+  );
+};
 
 export default function Menu() {
+  // useEffect(() => {
+  //   getLocal();
+  //   console.log(meals);
+  //   // getMenu();
+  // }, [meals])
+
   return (
     <div>
-      {getMenu()}
-      <h3>test</h3>
+      <GetMenu />
     </div>
   );
 }

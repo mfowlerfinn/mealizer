@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -47,11 +48,6 @@ export default function MenuAppBar({ title }) {
     window.location.href = "/";
   };
 
-  const handleRoute = route => {
-    setAnchorEl(null);
-    window.location.href = route;
-  };
-
   return (
     <div className={classes.root}>
       {/* <FormGroup>
@@ -89,12 +85,18 @@ export default function MenuAppBar({ title }) {
             open={open}
             onClose={handleClose}
           >
-            <MenuItem onClick={() => handleRoute("/")}>Plan Meals</MenuItem>
-            <MenuItem onClick={() => handleRoute("/menu")}>Menu</MenuItem>
-            <MenuItem onClick={() => handleRoute("/groceries")}>
+            <MenuItem component={Link} to={"/"} onClick={handleClose}>
+              Plan Meals
+            </MenuItem>
+            <MenuItem component={Link} to={"/menu"} onClick={handleClose}>
+              Menu
+            </MenuItem>
+            <MenuItem component={Link} to={"/groceries"} onClick={handleClose}>
               Grocery List
             </MenuItem>
-            <MenuItem onClick={() => handleRoute("/recipe")}>Recipes</MenuItem>
+            <MenuItem component={Link} to={"/recipe"} onClick={handleClose}>
+              Recipes
+            </MenuItem>
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </Menu>
         </Toolbar>

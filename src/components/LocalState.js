@@ -15,16 +15,30 @@ const dataStructure = {
 
 const days = Array(dataStructure.days).fill(true);
 
+
+
 const menuStructure = [];
+
+const restoreLocalMenu = () => {
+  if (localStorage.getItem("menu")) {
+    let storedString = localStorage.getItem("menu");
+    let localMenu = JSON.parse(storedString);
+    return localMenu;
+  }
+  else { 
+    return [];
+  }
+}
+
 
 function StateProvider({ children }) {
   const [options, setOptions] = useState(dataStructure);
-  const [menu, setMenu] = useState(menuStructure);
-  const [finalMenu, setFinalMenu] = useState(menuStructure);
+  const [menuIndex, setMenuIndex] = useState(menuStructure);
+  const [menuObject, setMenuObject] = useState(restoreLocalMenu);
   const [activeDays, setActiveDays] = useState(days);
 
   return (
-    <LocalStateProvider value={{ options, setOptions, menu, setMenu, activeDays, setActiveDays, finalMenu, setFinalMenu }}>
+    <LocalStateProvider value={{ options, setOptions, menuIndex, setMenuIndex, activeDays, setActiveDays, menuObject, setMenuObject }}>
       {children}
     </LocalStateProvider>
   );

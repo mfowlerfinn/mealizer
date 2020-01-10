@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { useGlobalState } from "./LocalState";
+import { useGlobalState } from "../components/LocalState";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -58,12 +58,12 @@ export default function CompileMenu() {
   const {
     options,
     setOptions,
-    menu,
-    setMenu,
+    menuIndex,
+    setMenuIndex,
     activeDays,
     setActiveDays,
-    finalMenu,
-    setFinalMenu
+    menuObject,
+    setMenuObject
   } = useGlobalState();
 
   const handleChange = e => {
@@ -78,20 +78,24 @@ export default function CompileMenu() {
       let randomIndex = Math.round(Math.random() * len);
       arr.push(randomIndex);
     }
-    setMenu(arr);
+    setMenuIndex(arr);
   }
 
-  const setMenuObject = () => {
-    let final = menu.map(val => Data.recipes[val]);
-    setFinalMenu(final);
-    let local = JSON.stringify(final);
-    localStorage.setItem("final", local);
-    console.log(final);
+  const saveMenuToLocal = () => {
+    if (menuIndex.length > 0) {
+      let arr = menuIndex.map(val => Data.recipes[val]);
+      setMenuObject(arr);
+      let local = JSON.stringify(arr);
+      localStorage.setItem("menu", local);
+      console.log(arr);
+    } else {
+      return;
+    }
   };
 
   useEffect(() => {
-    console.log(finalMenu);
-  }, [finalMenu]);
+    console.log(menuObject);
+  }, [menuObject]);
 
   let day = options.startDay;
   let recipeCards = [];
@@ -100,14 +104,46 @@ export default function CompileMenu() {
 
   const classes = useStyles();
 
-  const Cards = () => {
+  const CardConstructor = () => {
+    return (
+      <div>
+        {menuObject.map((meal, index) => {
+          return (
+            <div className="day-container" key={index}>
+              <div className="day-header">
+                <label className="switch">
+                  <input type="checkbox" name={`${index}`}  onChange={(e) => console.log(`day ${index} is ${e.target.checked}`)} />
+                  <span className="slider round"></span>
+                </label>
+                <div className="day-title">dayname</div>
+                <div className="day-options">
+                  <Button>Swap</Button>
+                  <Button>shuffle</Button>
+                  <Button>servings</Button>
+                  <Button>additional</Button>
+                </div>
+              </div>
+              <div className="recipe-card" id={index}>
+                <div className="recipe-title">{meal.title}</div>
+                <div className="recipe-subtitle">{meal.subtitle}</div>
+                <div className="recipe-description">{meal.description}</div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+
+  const Cards = () => { //material-ui rendering
     recipeCards = [];
-    if (menu.length > 1) {
-      for (let i = 0; i < menu.length; i++) {
+
+    if (menuIndex.length > 1) {
+      for (let i = 0; i < menuIndex.length; i++) {
         let dayKey = day + i;
         let dayNum = dayKey % 7;
         let dayString = weekday[dayNum];
-        let index = menu[i];
+        let index = menuIndex[i];
         let title = Data.recipes[index].title;
         let subtitle = Data.recipes[index].subtitle;
         let description = Data.recipes[index].description;
@@ -150,65 +186,15 @@ export default function CompileMenu() {
     return recipeCards;
   };
 
-  // const CardConstructor = () => {
-  //   return (
-  //     <div>
-  //       {menu.map((meal, index) => {
-  //         console.log({ meal, index });
-  //         let dayKey = index;
-  //         let dayNum = dayKey % 7;
-  //         dayString = weekday[dayNum];
-  //         let title = Data.recipes[index].title;
-  //         let subtitle = Data.recipes[index].subtitle;
-  //         let description = Data.recipes[index].description;
-  //         return (
-  //           <Card key={dayKey} className={classes.card}>
-  //             <CardContent className={classes.content}>
-  //               <FormControlLabel
-  //                 control={
-  //                   <Checkbox
-  //                     checked={activeDays[dayKey] ? true : false}
-  //                     name={`${dayKey}`}
-  //                     color="primary"
-  //                     onChange={handleChange}
-  //                   />
-  //                 }
-  //                 label={dayString}
-  //               />
-  //               <div className={activeDays[dayKey] ? null : classes.hide}>
-  //                 {/* {(checked) && (checked[dayKey]) ? null : display: none} */}
-  //                 <Typography variant="h6" component="h2">
-  //                   {title}
-  //                 </Typography>
-  //                 <Typography className={classes.pos} color="textSecondary">
-  //                   {subtitle}
-  //                 </Typography>
-  //                 <Typography variant="body2" component="p">
-  //                   {description}
-  //                 </Typography>
-  //                 {/* <Typography color="textSecondary">estimated time</Typography> */}
-  //               </div>
-  //             </CardContent>
-  //             {/* <CardActions>
-  //             <Button size="small">Learn More</Button>
-  //           </CardActions> */}
-  //           </Card>
-  //         );
-  //       })}
-  //     </div>
-  //   );
-  // };
-
   function handleLocal() {
-    localStorage.setItem("menu", menu);
+    localStorage.setItem("menuIndex", menuIndex);
   }
 
-  function restoreLocal() {
+  function restoreLocalMenu() {
     if (localStorage.getItem("menu")) {
-      let storedMenu = localStorage.getItem("menu");
-      let arr = storedMenu.split(",");
-      let storedMenuIndex = arr.map(val => parseInt(val));
-      setMenu(storedMenuIndex);
+      let storedString = localStorage.getItem("menu");
+      let storedMenu = JSON.parse(storedString);
+      setMenuObject(storedMenu);
       isStoredLocal = true;
     } else {
       getRandomIndex(options.days);
@@ -216,22 +202,27 @@ export default function CompileMenu() {
     }
   }
 
-  useEffect(() => {
-    Cards();
-    // console.log(menu)
-    setMenuObject();
-  }, [menu]);
+  // useEffect(() => {
+  //   Cards();
+  //   // console.log(menu)
+  // }, [menuObject]);
 
   useEffect(() => {
-    restoreLocal();
+    saveMenuToLocal();
+  }, [menuIndex]);
+
+  useEffect(() => {
+    console.log(menuObject);
   }, []);
 
   return (
     <Fragment>
+      <Button onClick={() => console.log("options!")}>Options</Button>
       <Button onClick={() => getRandomIndex(options.days)}>Shuffle</Button>
       <Button onClick={handleLocal}>Store</Button>
-      <Button onClick={restoreLocal}>Restore</Button>
-      {Cards()}
+      <Button onClick={restoreLocalMenu}>Restore</Button>
+      {/* {Cards()} */}
+      <CardConstructor />
     </Fragment>
   );
 }

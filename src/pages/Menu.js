@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from "react";
-import { useGlobalState } from "./LocalState";
+import { useGlobalState } from "../components/LocalState";
 
 let plannedMeals = false;
 let meals = [];
@@ -20,10 +20,23 @@ const getLocal = () => {
 //get compiled menu from state or database?
 
 const GetMenu = () => {
-  getLocal();
+  // getLocal();
+  const {
+    options,
+    setOptions,
+    menuIndex,
+    setMenuIndex,
+    activeDays,
+    setActiveDays,
+    menuObject,
+    setMenuObject
+  } = useGlobalState();
+
+  console.log(menuObject);
+
   return (
     <Fragment>
-      {meals.map((meal, i) => {
+      {menuObject.map((meal, i) => {
         return (
           <div key={i}>
             <h1>{meal.title}</h1>

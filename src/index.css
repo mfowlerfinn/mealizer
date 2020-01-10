@@ -1,13 +1,154 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.day-container {
+  /* color: green; */
+  /* border: 1px solid green; */
+  margin: 1em;
+  /* background-color: beige; */
+  /* padding: 1em; */
+  padding: 0.4em;
+  font-size: 1rem;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+
+.day-title {
+  display: inline-block;
+  /* border: 1px solid green; */
+  font-size: 1.5em;
+  font-weight: 300;
+  text-transform: uppercase;
+  margin-right: 0.5em;
+  /* width: 100%;
+  height: 100%; */
+  text-align: center;
+  /* border-bottom: 1px solid black; */
+  /* margin: 0;
+  margin-bottom: 0.5em; */
+}
+
+.day-options {
+  display: inline-block;
+}
+
+.recipe-card {
+  /* color: green; */
+  /* border: 1px solid red; */
+  padding: 0.5em;
+  border-radius: 4px;
+  box-shadow: 1.5px 1.5px 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+.recipe-title {
+  /* padding: inherit; */
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  font-weight: 500;
+  /* color: blue; */
+}
+
+.recipe-subtitle {
+  /* padding: inherit; */
+  font-weight: 300;
+  font-size: 1.2em;
+}
+
+.recipe-description {
+  margin-top: 0.7em;
+  /* padding: inherit; */
+}
+
+/* .recipe-ingredients {
+} */
+
+.day-header {
+  display: flex;
+  align-items: baseline;
+  /* font-size: 2em; */
+  /* align-content: center;
+  text-align: center; */
+}
+
+/* The switch - the box around the slider */
+.switch {
+  /* top: 0.2em; */
+  /* align-self: center; */
+  --switch-width: 2em;
+  --switch-height: 0.9em;
+  --slider-dot-size: 0.8; /* in percent of slider height */
+  margin-right: 0.5em;
+  position: relative;
+  display: inline-block;
+  width: var(--switch-width);
+  height: var(--switch-height);
+  /* margin-top: 1em; */
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: calc(var(--switch-height) * var(--slider-dot-size));
+  width: calc(var(--switch-height) * var(--slider-dot-size));
+  left: calc(var(--switch-height) * calc((1 - var(--slider-dot-size)) / 2));
+  bottom: calc(var(--switch-height) * calc((1 - var(--slider-dot-size)) / 2));
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  /* -webkit-transform: translateX(var(--switch-width)); */
+  /* -ms-transform: translateX(var(--switch-width)); */
+  transform: translateX(calc(var(--switch-width) - var(--switch-height)));
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: calc(var(--switch-height) / 2);
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }

@@ -4,15 +4,13 @@ import Menu from "./pages/Menu";
 import CompileMenu from "./pages/CompileMenu";
 import Recipe from "./pages/Recipe";
 import Groceries from "./pages/Groceries";
-import MenuAppBar from "./components/MenuAppBar";
 
-import { StateProvider } from "./components/LocalState";
+import { StateProvider } from "./context/LocalState";
 
 function App() {
   return (
     <StateProvider>
       <Router>
-        <MenuAppBar title={"title"} />
         <Switch>
           <Route exact path="/">
             <CompileMenu />

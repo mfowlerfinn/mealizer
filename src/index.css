@@ -42,7 +42,8 @@ code {
 }
 
 .day-options {
-  display: inline-block;
+  display: block;
+  flex-wrap: nowrap;
 }
 
 .recipe-card {
@@ -81,74 +82,4 @@ code {
   /* font-size: 2em; */
   /* align-content: center;
   text-align: center; */
-}
-
-/* The switch - the box around the slider */
-.switch {
-  /* top: 0.2em; */
-  /* align-self: center; */
-  --switch-width: 2em;
-  --switch-height: 0.9em;
-  --slider-dot-size: 0.8; /* in percent of slider height */
-  margin-right: 0.5em;
-  position: relative;
-  display: inline-block;
-  width: var(--switch-width);
-  height: var(--switch-height);
-  /* margin-top: 1em; */
-}
-
-/* Hide default HTML checkbox */
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-/* The slider */
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: calc(var(--switch-height) * var(--slider-dot-size));
-  width: calc(var(--switch-height) * var(--slider-dot-size));
-  left: calc(var(--switch-height) * calc((1 - var(--slider-dot-size)) / 2));
-  bottom: calc(var(--switch-height) * calc((1 - var(--slider-dot-size)) / 2));
-  background-color: white;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-}
-
-input:checked + .slider {
-  background-color: #2196f3;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196f3;
-}
-
-input:checked + .slider:before {
-  /* -webkit-transform: translateX(var(--switch-width)); */
-  /* -ms-transform: translateX(var(--switch-width)); */
-  transform: translateX(calc(var(--switch-width) - var(--switch-height)));
-}
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: calc(var(--switch-height) / 2);
-}
-
-.slider.round:before {
-  border-radius: 50%;
 }

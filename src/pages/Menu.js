@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from "react";
-import { useGlobalState } from "../components/LocalState";
+import { useGlobalState } from "../context/LocalState";
+import MenuAppBar from "../components/MenuAppBar";
 
 let plannedMeals = false;
 let meals = [];
@@ -32,8 +33,6 @@ const GetMenu = () => {
     setMenuObject
   } = useGlobalState();
 
-  console.log(menuObject);
-
   return (
     <Fragment>
       {menuObject.map((meal, i) => {
@@ -51,14 +50,10 @@ const GetMenu = () => {
 };
 
 export default function Menu() {
-  // useEffect(() => {
-  //   getLocal();
-  //   console.log(meals);
-  //   // getMenu();
-  // }, [meals])
 
   return (
     <div>
+      <MenuAppBar title={"menu"} />
       <GetMenu />
     </div>
   );

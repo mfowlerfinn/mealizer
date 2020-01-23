@@ -9,6 +9,7 @@ export default function Switch({ isOn, handleToggle, index }) {
           type="checkbox"
           checked={isOn}
           name={`${index}`}
+          onChange={() => null}
         />
         <span
           onClick={() => handleToggle(index)}

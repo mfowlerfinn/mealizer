@@ -4,7 +4,7 @@
   /* top: 0.2em; */
   /* align-self: center; */
   --switch-width: 2em;
-  --switch-height: 0.9em;
+  --switch-height: 0.8em;
   --slider-dot-size: 0.8; /* in percent of slider height */
   margin-right: 0.5em;
   position: relative;

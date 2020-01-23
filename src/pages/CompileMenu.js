@@ -1,17 +1,10 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { useGlobalState } from "../context/LocalState";
 import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import Checkbox from "@material-ui/core/Checkbox";
-import { FormControlLabel, Hidden } from "@material-ui/core";
-import Data from "../static/data.json";
 import Switch from "../components/Switch";
 import { PLAN_MEALS, DAY_IS_ACTIVE } from "../context/reducers";
-import { restoreArrayFromLocal, saveArrayToLocal } from "../static/Helpers";
+import { saveArrayToLocal } from "../static/Helpers";
 import MenuAppBar from "../components/MenuAppBar";
 import OptionBar from "../components/OptionBar";
 
@@ -55,8 +48,6 @@ export default function CompileMenu() {
     setOptions,
     menuIndex,
     setMenuIndex,
-    activeDays,
-    setActiveDays,
     menuObject,
     setMenuObject
   } = useGlobalState();
@@ -64,10 +55,6 @@ export default function CompileMenu() {
   useEffect(() => {
     saveArrayToLocal(menuObject, "menu");
   }, [menuObject]);
-
-  useEffect(() => {
-    saveArrayToLocal(activeDays, "activeDays");
-  }, [activeDays]);
 
   let day = options.startDay;
   let recipeCards = [];
@@ -77,16 +64,15 @@ export default function CompileMenu() {
   const classes = useStyles();
 
   function handleSwitch(index) {
-    let newVal = !activeDays[index].value;
-    setActiveDays({ type: DAY_IS_ACTIVE, day: index, bool: newVal });
+    let newVal = !menuObject[index].planDay;
+    setMenuObject({ type: DAY_IS_ACTIVE, day: index, bool: newVal });
   }
 
   const CardConstructor = () => {
     return (
       <div>
         {menuObject.map((meal, index) => {
-          let dayState = activeDays[index].value;
-
+          let dayState = menuObject[index].planDay;
           return (
             <div className="day-container" key={index}>
               <div className="day-header">
@@ -95,9 +81,10 @@ export default function CompileMenu() {
                   handleToggle={handleSwitch}
                   index={index}
                 />
-                <div className="day-title">dayname</div>
+                <div className="day-title">{meal.dayName}</div>
+                <div className="day-date">the {meal.dayOfMonth}</div>
                 <div className={dayState ? "day-options" : classes.hide}>
-                  <Button>options</Button>
+                  {/*<Button>options</Button>*/}
                 </div>
               </div>
 
@@ -121,7 +108,11 @@ export default function CompileMenu() {
   };
 
   const shuffle = () => {
-    setMenuObject({ type: PLAN_MEALS, numberOfMeals: options.days });
+    setMenuObject({
+      type: PLAN_MEALS,
+      numberOfMeals: options.days,
+      startDate: options.startDate
+    });
   };
 
   useEffect(() => {

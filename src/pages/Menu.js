@@ -2,24 +2,6 @@ import React, { Fragment, useEffect } from "react";
 import { useGlobalState } from "../context/LocalState";
 import MenuAppBar from "../components/MenuAppBar";
 
-let plannedMeals = false;
-let meals = [];
-
-const getLocal = () => {
-  let item = "final";
-  if (localStorage.getItem(item)) {
-    let storedString = localStorage.getItem(item);
-    meals = JSON.parse(storedString);
-    // console.log(meals);
-    plannedMeals = true;
-    // return storedArray;
-  } else {
-    plannedMeals = false;
-  }
-};
-
-//get compiled menu from state or database?
-
 const GetMenu = () => {
   // getLocal();
   const {

@@ -1,6 +1,9 @@
 import React, { createContext, useState, useContext, useReducer } from "react";
-import { menuReducer, dayReducer } from "./reducers";
-import { restoreArrayFromLocal, saveArrayToLocal } from "../static/Helpers";
+import { menuReducer, optionsReducer } from "./reducers";
+import { restoreArrayFromLocal } from "../static/Helpers";
+import { startOfToday } from "date-fns";
+
+const today = startOfToday();
 
 const LocalStateContext = createContext();
 
@@ -10,29 +13,18 @@ const dataStructure = {
   weeks: 1,
   days: 7,
   servings: 2,
-  startDay: 0
+  startDate: today
 };
-
-const days = [
-  { day: 0, value: true },
-  { day: 1, value: true },
-  { day: 2, value: true },
-  { day: 3, value: true },
-  { day: 4, value: true },
-  { day: 5, value: true },
-  { day: 6, value: true }
-];
 
 const menuStructure = [];
 
 function StateProvider({ children }) {
-  const [options, setOptions] = useState(dataStructure);
+  const [options, setOptions] = useReducer(optionsReducer, dataStructure);
   const [menuIndex, setMenuIndex] = useState(menuStructure);
   const [menuObject, setMenuObject] = useReducer(
     menuReducer,
     restoreArrayFromLocal("menu")
   );
-  const [activeDays, setActiveDays] = useReducer(dayReducer, days);
 
   return (
     <LocalStateProvider
@@ -41,8 +33,6 @@ function StateProvider({ children }) {
         setOptions,
         menuIndex,
         setMenuIndex,
-        activeDays,
-        setActiveDays,
         menuObject,
         setMenuObject
       }}

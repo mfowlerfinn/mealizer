@@ -28,7 +28,7 @@ const toggleDay = (day, bool, state) => {
   return newArr;
 };
 
-const getMeals = (numberOfMeals, startDate, state) => {
+const getMeals = (numberOfMeals, startDate, servings, state) => {
   let indexRange = Data.recipes.length;
   let arrayIndex = arrayOfRandomNumbers(numberOfMeals, indexRange);
   let menuArray = arrayIndex.map((val, index) => {
@@ -43,8 +43,10 @@ const getMeals = (numberOfMeals, startDate, state) => {
     mObj.dayOfWeek = dayOfWeek;
     mObj.planDay = true;
     mObj.index = index;
+    mObj.servings = servings;
     return mObj;
   });
+  console.log(menuArray);
   return menuArray;
 };
 
@@ -63,7 +65,12 @@ export const menuReducer = (state, action) => {
     case SET_MENU_FOR_DAY:
       return;
     case PLAN_MEALS:
-      return getMeals(action.numberOfMeals, action.startDate, state);
+      return getMeals(
+        action.numberOfMeals,
+        action.startDate,
+        action.servings,
+        state
+      );
     case DAY_IS_ACTIVE:
       return toggleDay(action.day, action.bool, state);
     default:

@@ -5,7 +5,7 @@ import MenuAppBar from "../components/MenuAppBar";
 export default function recipe() {
   return (
     <div>
-      <MenuAppBar title={"recipes"} />
+      <MenuAppBar title={"Recipes"} />
       <RecipeList />
     </div>
   );

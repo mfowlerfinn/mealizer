@@ -1,41 +1,41 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 import { useGlobalState } from "../context/LocalState";
 import MenuAppBar from "../components/MenuAppBar";
 
-const GetMenu = () => {
-  // getLocal();
-  const {
-    options,
-    setOptions,
-    menuIndex,
-    setMenuIndex,
-    activeDays,
-    setActiveDays,
-    menuObject,
-    setMenuObject
-  } = useGlobalState();
-
-  return (
-    <Fragment>
-      {menuObject.map((meal, i) => {
-        return (
-          <div key={i}>
-            <h1>{meal.title}</h1>
-            <ul>
-              <li>{meal.subtitle}</li>
-            </ul>
-          </div>
-        );
-      })}
-    </Fragment>
-  );
-};
-
 export default function Menu() {
+  const { menuObject } = useGlobalState();
+
+  const GetMenu = () => {
+    let len = menuObject.length;
+    return (
+      <Fragment>
+        {menuObject.map((meal, index) => {
+          let dayState = menuObject[index].planDay;
+          return (
+            <div className="day-container" key={index}>
+              <div className="day-header">
+                <div className="day-title">{meal.dayName}</div>
+                <div className="day-date">the {meal.dayOfMonth}</div>
+                <div className="day-date">
+                  {dayState ? `(${meal.servings} servings)` : `not planned`}
+                </div>
+              </div>
+              <div className="divider"></div>
+              <div className={dayState ? "menu-card" : "hide"} id={index}>
+                <div className="recipe-title">{meal.title}</div>
+                <div className="recipe-subtitle">{meal.subtitle}</div>
+                <div className="recipe-ingredients">{meal.ingredients}</div>
+              </div>
+            </div>
+          );
+        })}
+      </Fragment>
+    );
+  };
 
   return (
     <div>
-      <MenuAppBar title={"menu"} />
+      <MenuAppBar title={"Menu"} />
       <GetMenu />
     </div>
   );

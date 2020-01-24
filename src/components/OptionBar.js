@@ -8,6 +8,7 @@ import {
 } from "@material-ui/pickers";
 import { startOfToday, addDays, differenceInDays } from "date-fns";
 import { useGlobalState } from "../context/LocalState";
+import TextInput from "./TextInput";
 
 export default function OptionBar({ shuffle }) {
   const {
@@ -27,6 +28,7 @@ export default function OptionBar({ shuffle }) {
   const [startDate, setStartDate] = React.useState(today);
   const [endDate, setEndDate] = React.useState(endDay);
   const [days, setDays] = React.useState(weekLength);
+  const [servings, setServings] = React.useState(2);
 
   const handleStartDateChange = date => {
     setStartDate(date);
@@ -41,8 +43,6 @@ export default function OptionBar({ shuffle }) {
   }, [startDate, endDate]);
 
   useEffect(() => {
-    console.log(`days to plan: ${days}`);
-
     setOptions({ days: days, startDate: startDate });
   }, [days]);
 
@@ -72,6 +72,7 @@ export default function OptionBar({ shuffle }) {
             "aria-label": "change date"
           }}
         />
+        <TextInput />
       </Grid>
     </MuiPickersUtilsProvider>
   );

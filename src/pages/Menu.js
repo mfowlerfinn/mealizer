@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { useGlobalState } from "../context/LocalState";
 import MenuAppBar from "../components/MenuAppBar";
+import { IngredientLine } from "../components/IngredientLine";
 
 export default function Menu() {
   const { menuObject } = useGlobalState();
@@ -24,7 +25,13 @@ export default function Menu() {
               <div className={dayState ? "menu-card" : "hide"} id={index}>
                 <div className="recipe-title">{meal.title}</div>
                 <div className="recipe-subtitle">{meal.subtitle}</div>
-                <div className="recipe-ingredients">{meal.ingredients}</div>
+                {meal.ingredients.map( item => {
+                  return IngredientLine(item);
+                })}
+                {meal.instructions.map( item => {
+                  return <div className="recipe-instructions">{item}</div>
+                })}
+                
               </div>
             </div>
           );

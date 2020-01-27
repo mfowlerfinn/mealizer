@@ -1,5 +1,7 @@
 import { arrayOfRandomNumbers } from "../static/Helpers";
-import Data from "../static/data.json";
+import Data from "../static/data-allSample.json";
+//import Data from "../static/data.json";
+import { stringToObj } from '../static/stringHelpers';
 
 import { add, format } from "date-fns";
 
@@ -44,6 +46,11 @@ const getMeals = (numberOfMeals, startDate, servings, state) => {
     mObj.planDay = true;
     mObj.index = index;
     mObj.servings = servings;
+    mObj.ingredients = mObj.ingredients.map(itemToParse => {
+      let item = stringToObj(itemToParse);
+      console.log(item);
+      return item;
+    });
     return mObj;
   });
   console.log(menuArray);

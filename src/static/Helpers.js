@@ -1,5 +1,7 @@
 //some helper functions for maths
 
+
+
 export const restoreArrayFromLocal = keyName => {
   if (localStorage.getItem(keyName)) {
     let storedString = localStorage.getItem(keyName);
@@ -25,3 +27,4 @@ export const arrayOfRandomNumbers = (len, maxRange) => {
   );
   return arr;
 };
+

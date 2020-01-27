@@ -68,7 +68,20 @@ code {
 }
 
 .recipe-ingredients {
+  padding-left: 1em;
+  font-size: 1em;
+  /* display: inline-flex; */
+}
+
+.ingredient-pieces {
+  display: inline-flex;
+  padding-left: 0.3em;
+}
+
+.recipe-instructions {
   padding: 0.5em;
+  font-size: 1.2em;
+  display: block;
 }
 
 .day-header {

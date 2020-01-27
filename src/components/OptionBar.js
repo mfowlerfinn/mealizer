@@ -14,8 +14,6 @@ export default function OptionBar({ shuffle }) {
   const {
     options,
     setOptions,
-    menuIndex,
-    setMenuIndex,
     menuObject,
     setMenuObject
   } = useGlobalState();

@@ -5,13 +5,15 @@ export const stringToObj = str => {
   let obj = parse(str);
   obj.unit = obj.unit === "teaspoon" ? "tsp" : obj.unit;
   obj.unit = obj.unit === "tablespoon" ? "Tbs" : obj.unit;
-  obj.unit = obj.unit == "pint" ? "pt" : obj.unit;
-  obj.unit = obj.unit == "quart" ? "qt" : obj.unit;
+  obj.unit = obj.unit === "pint" ? "pt" : obj.unit;
+  obj.unit = obj.unit === "quart" ? "qt" : obj.unit;
 
   if (obj.ingredient.slice(0, 3) === "egg") obj.ingredient = "egg";
 
   try {
     if (obj.unit) {
+      //what type of measurement is it (mass or volume)?
+      //what are we trying to convert to?
       let unit = "ml";
       let num = convert(obj.quantity)
         .from(obj.unit)

@@ -34,7 +34,7 @@ export default function CompileMenu() {
                 <div className="day-title">{meal.dayName}</div>
                 <div className="day-date">the {meal.dayOfMonth}</div>
                 <div className={dayState ? "day-options" : "hide"}>
-                  <div className="day-date">({meal.servings} servings)</div>
+                  <div className="day-date">({meal.servings})</div>
                 </div>
               </div>
 
@@ -57,6 +57,7 @@ export default function CompileMenu() {
   const shuffle = () => {
     setMenuObject({
       type: PLAN_MEALS,
+      mealType: options.mealType,
       numberOfMeals: options.days,
       startDate: options.startDate,
       servings: options.servings

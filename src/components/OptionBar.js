@@ -8,6 +8,7 @@ import {
 } from "@material-ui/pickers";
 import { startOfToday, addDays, differenceInDays } from "date-fns";
 import { useGlobalState } from "../context/LocalState";
+import { RecipeTypeSelector } from "./RecipeTypeSelector";
 import TextInput from "./TextInput";
 
 export default function OptionBar({ shuffle }) {
@@ -44,6 +45,11 @@ export default function OptionBar({ shuffle }) {
     setOptions({ days: days, startDate: startDate });
   }, [days]);
 
+  const handleMealType = (code) => {
+    // console.log(code);
+    setOptions({mealType: code});
+  }
+
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Grid container justify="space-around">
@@ -70,8 +76,10 @@ export default function OptionBar({ shuffle }) {
             "aria-label": "change date"
           }}
         />
+
         <TextInput />
       </Grid>
+      <RecipeTypeSelector setOutput={handleMealType} />
     </MuiPickersUtilsProvider>
   );
 }

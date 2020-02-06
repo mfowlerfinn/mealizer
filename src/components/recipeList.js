@@ -1,14 +1,28 @@
 import React from "react";
-import Data from "../static/data.json";
+import RecipeData from "../static/recipes.json";
+import { IngredientLine } from "./IngredientLine";
 
 const Recipes = () => {
-  return Data.recipes.map((recipe, i) => {
+  let n = 0;
+  return RecipeData.map((recipe, i) => {
+
+    // if(recipe.categoryCode != 'M') return null;
+    // n+=1;
+    // console.log(n);
+    // console.log(recipe); 
     return (
       <div className="day-container" key={i}>
         <div className="recipe-title">{recipe.title}</div>
         <div className="divider"></div>
         <div className="recipe-subtitle">{recipe.subtitle}</div>
-        <div className="recipe-ingredients">{recipe.ingredients}</div>
+        {recipe.ingredients.map(item => {
+          return IngredientLine(item);
+        })}
+        <div className="recipe-instructions">
+          {recipe.procedures.map(item => {
+            return <div className="recipe-instruction">{item}</div>;
+          })}
+        </div>
       </div>
     );
   });

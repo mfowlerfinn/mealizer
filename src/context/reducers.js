@@ -1,5 +1,5 @@
 import { arrayOfRandomNumbers } from "../static/Helpers";
-import Data from "../static/data-allSample.json";
+import Recipes from "../static/recipes.json";
 //import Data from "../static/data.json";
 import { stringToObj } from '../static/stringHelpers';
 
@@ -30,12 +30,14 @@ const toggleDay = (day, bool, state) => {
   return newArr;
 };
 
-const getMeals = (numberOfMeals, startDate, servings, state) => {
-  let indexRange = Data.recipes.length;
+const getMeals = (mealType, numberOfMeals, startDate, servings, state) => {
+  let mealTypeArray = Recipes.filter((recipe) => {return recipe.categoryCode === mealType});
+  let indexRange = mealTypeArray.length;
+  console.log(indexRange, ' options available')
   let arrayIndex = arrayOfRandomNumbers(numberOfMeals, indexRange);
   let menuArray = arrayIndex.map((val, index) => {
     let date = add(startDate, { days: index });
-    let mObj = Data.recipes[val];
+    let mObj = mealTypeArray[val];
     mObj.date = date;
     let dayName = format(date, "eeee");
     mObj.dayName = dayName;
@@ -45,12 +47,7 @@ const getMeals = (numberOfMeals, startDate, servings, state) => {
     mObj.dayOfWeek = dayOfWeek;
     mObj.planDay = true;
     mObj.index = index;
-    mObj.servings = servings;
-    mObj.ingredients = mObj.ingredients.map(itemToParse => {
-      let item = stringToObj(itemToParse);
-      console.log(item);
-      return item;
-    });
+    mObj.scale = 1;
     return mObj;
   });
   console.log(menuArray);
@@ -73,6 +70,7 @@ export const menuReducer = (state, action) => {
       return;
     case PLAN_MEALS:
       return getMeals(
+        action.mealType,
         action.numberOfMeals,
         action.startDate,
         action.servings,

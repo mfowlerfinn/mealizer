@@ -1,6 +1,7 @@
 import React from "react";
 import MenuAppBar from "../components/MenuAppBar";
 import { useGlobalState } from "../context/LocalState";
+import { IngredientLine } from "../components/IngredientLine";
 
 function Groceries() {
   const { menuObject, groceries } = useGlobalState();
@@ -20,18 +21,12 @@ function Groceries() {
   // };
 
   const GetItems = () => {
-    let groceryKeys = Object.keys(groceries);
-    //console.log(groceryKeys);
-    return groceryKeys.map((item, index) => {
-      //console.log(item);
-      let unit = groceries[item].unit != null ? groceries[item].unit : "";
-      let dependantRecipes = groceries[item].recipes;
-      let quantity = groceries[item].quantity;
-      let recipes = dependantRecipes > 1 ? "s" : "";
+    return groceries.map((item, index) => {
 
       return (
         <div className="recipe-ingredients" key={index}>
-          <div className="ingredient-pieces">{`${quantity} ${unit} ${item}`}</div>
+          {IngredientLine(item)}
+          {/* <div className="ingredient-pieces">{`${item.quantity} ${(item.unit != 'none') ? item.unit : ""} ${item.item}`}</div> */}
           {/* <div className="ingredient-pieces">{`for ${dependantRecipes} recipe${recipes}`}</div> */}
         </div>
       );

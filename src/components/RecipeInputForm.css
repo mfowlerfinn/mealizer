@@ -1,0 +1,14 @@
+.main-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 20em;
+  margin: auto;
+}
+
+.main-form > .form-item {
+  margin: 0.7em;
+}
+
+.text-field {
+  resize: vertical;
+}

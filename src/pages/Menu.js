@@ -18,17 +18,17 @@ export default function Menu() {
                 <div className="day-title">{meal.dayName}</div>
                 <div className="day-date">the {meal.dayOfMonth}</div>
                 <div className="day-date">
-                  {dayState ? `(${meal.servings} servings)` : `not planned`}
+                  {dayState ? `(${meal.servings})` : `not planned`}
                 </div>
               </div>
               <div className="divider"></div>
-              <div className={dayState ? "menu-card" : "hide"} id={index}>
+              <div className={dayState ? "menu-card" : "hide"}>
                 <div className="recipe-title">{meal.title}</div>
                 <div className="recipe-subtitle">{meal.subtitle}</div>
                 {meal.ingredients.map( item => {
                   return IngredientLine(item);
                 })}
-                {meal.instructions.map( item => {
+                {meal.procedures.map( item => {
                   return <div className="recipe-instructions">{item}</div>
                 })}
                 

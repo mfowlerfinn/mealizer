@@ -1,11 +1,31 @@
 import React from "react";
 
-export const IngredientLine = Obj => {
+export const IngredientLine = ingredient => {
+  const show = key => {
+    let exists = false;
+
+    if (ingredient[key]) {
+      let testString = ingredient[key].toString();
+      if (testString.length > 0) {
+        if (testString != "none") {
+          exists = true;
+        }
+      }
+    }
+
+    return !exists ? null : (
+      <div className="ingredient-pieces">
+        {ingredient[key]}
+      </div>
+    );
+  };
+
   return (
     <div className="recipe-ingredients">
-      <div className="ingredient-pieces" >{Obj.quantity}</div>
-      {(Obj.unit != null) ? <div className="ingredient-pieces" >{Obj.unit}</div> : null}
-      <div className="ingredient-pieces" >{Obj.ingredient}</div>
+      {show("quantity")}
+      {show("unit")}
+      {show("item")}
+      {show("notes")}
     </div>
   );
 };

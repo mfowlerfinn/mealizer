@@ -16,11 +16,29 @@ const LocalStateContext = createContext();
 const LocalStateProvider = LocalStateContext.Provider;
 
 const dataStructure = {
+  mealType: 'M',
   weeks: 1,
   days: 7,
   servings: 2,
-  startDate: today
+  startDate: today,
+  
 };
+
+const RECIPETYPES = [
+  "Main dish",
+  "Salad",
+  "Appetizer or snack",
+  "Soup",
+  "Bread/pasta",
+  "Dessert",
+  "Beverage (Liquid)",
+  "Vegetable dish",
+  "Cookie or cake",
+  "Other",
+  "Sauce"
+];
+
+const RECIPECODES = ["M", "SL", "A", "SP", "B", "D", "L", "V", "C", "O", "S"];
 
 const menuStructure = [];
 
@@ -33,31 +51,40 @@ function StateProvider({ children }) {
   );
 
   const compileGroceryList = () => {
-    let arr = {};
+    let arr = [];
     menuObject.map((meal, index) => {
       let dayState = menuObject[index].planDay;
       if (dayState === true) {
         meal.ingredients.map(item => {
-          let name = `${item.ingredient}`;
-          // console.log(`${name}`);
-          let obj = arr[name];
-          if (obj && arr[name].quantity) {
-            let val = parseInt(item.quantity) + parseInt(obj.quantity);
-            //console.log(`adding ${obj.quantity} and ${item.quantity} to get ${val}`);
-            arr[name].quantity = val;
-            obj.recipes += 1;
-          } else {
-            let newObj = {};
-            newObj.quantity = item.quantity;
-            newObj.recipes = 1;
-            newObj.unit = item.unit;
-            arr[name] = newObj;
+          if (item.type === "ingredient") {
+            let num, unit, name;
+            let match = false;
+            [num, unit, name] = [item.quantity, item.unit, item.item];
+            num = parseFloat(num);
+            let result = {};
+            result.quantity = num;
+            result.unit = unit;
+            result.item = name;
+
+            arr.forEach((item, index) => {
+              if (item.item === name) {
+                // console.log("match name");
+                if (item.unit === unit) {
+                  result.quantity += num;
+                  arr[index] = result;
+                  // console.log("match units");
+                  match = true;
+                } else {
+                  // console.log(unit, item.unit, item.item);
+                }
+              }
+            });
+            if (!match) arr.push(result);
           }
         });
       }
-      //console.log(arr);
     });
-    //console.log(arr);
+    // console.log(arr);
     setGroceries(arr);
   };
 
@@ -74,7 +101,9 @@ function StateProvider({ children }) {
         groceries,
         setGroceries,
         menuObject,
-        setMenuObject
+        setMenuObject,
+        RECIPETYPES,
+        RECIPECODES
       }}
     >
       {children}

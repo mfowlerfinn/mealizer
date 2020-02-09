@@ -1,0 +1,18 @@
+{
+  "name": "mealizer-api",
+  "version": "1.0.0",
+  "description": "API for Mealizer",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^7.0.1",
+    "request": "^2.88.0"
+  },
+  "dependencies": {}
+}

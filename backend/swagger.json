@@ -1,0 +1,221 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Mealize it!",
+    "version": "0.0.1",
+    "title": "Mealizer-API",
+    "termsOfService": "",
+    "contact": {
+      "email": "john.love4@gmail.com"
+    },
+    "license": {
+      "name": "",
+      "url": "http://localhost:3000"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/api",
+  "tags": [],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "paths": {
+    "/recipes": {
+      "get": {
+        "tags": [
+          "recipes"
+        ],
+        "summary": "Get all recipes",
+        "description": "Get all recipes",
+        "operationId": "getRecipes",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Recipe"
+            }
+          },
+          "400": {
+            "description": "bad recipes"
+          }
+        }
+      }
+    },
+    "/recipes/{id}": {
+      "get": {
+        "tags": [
+          "recipes"
+        ],
+        "summary": "Get one recipe",
+        "description": "Get one recipe",
+        "operationId": "getRecipe",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Recipe"
+            }
+          },
+          "400": {
+            "description": "bad recipe"
+          }
+        }
+      }
+    },
+    "/groceries/{id}": {
+      "get": {
+        "tags": [
+          "groceries"
+        ],
+        "summary": "Get one grocery list",
+        "description": "Get one grocery list",
+        "operationId": "getGroceryList",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/GroceryList"
+            }
+          },
+          "400": {
+            "description": "bad recipe"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Recipe": {
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "integer",
+          "format": "int"
+        },
+        "title": {
+          "type": "string",
+          "format": ""
+        },
+        "category_code": {
+          "type": "string",
+          "format": ""
+        },
+        "servings": {
+          "type": "string",
+          "format": ""
+        },
+        "subtitle": {
+          "type": "string",
+          "format": ""
+        },
+        "story": {
+          "type": "string",
+          "format": ""
+        },
+        "ingredient_list": {
+          "type": "integer",
+          "format": "int"
+        },
+        "grocery_list": {
+          "type": "integer",
+          "format": "int"
+        }                   
+      }
+    },
+    "Ingredient": {
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "integer",
+          "format": "int"
+        },
+        "item": {
+          "type": "string",
+          "format": ""
+        },
+        "quantity": {
+          "type": "float",
+          "format": ""
+        },
+        "unit": {
+          "type": "string",
+          "format": ""
+        },
+        "notes": {
+          "type": "string",
+          "format": ""
+        },
+        "range": {
+          "type": "boolean",
+          "format": ""
+        },
+        "ingredient_list": {
+          "type": "integer",
+          "format": ""
+        },
+        "grocery_list": {
+          "type": "integer",
+          "format": ""
+        }
+      }
+    },
+    "IngredientList": {
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "integer",
+          "format": "int"
+        },
+        "title": {
+          "type": "string",
+          "format": ""
+        }             
+      }
+    },
+    "GroceryList": {
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "integer",
+          "format": "int"
+        },
+        "title": {
+          "type": "string",
+          "format": ""
+        }             
+      }
+    }
+  }
+}
+

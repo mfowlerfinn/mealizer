@@ -6,7 +6,6 @@
 
 #Sequelize config
 config.json
-config.js
 
 # Logs
 logs

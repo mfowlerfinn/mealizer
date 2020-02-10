@@ -8,10 +8,11 @@ module.exports = sequelize => {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: null,
-      primaryKey: true,
+      primaryKey: false,
       autoIncrement: true,
       comment: null,
-      field: "uid"
+      field: "uid",
+      unique: "uid_UNIQUE"
     },
     title: {
       type: DataTypes.STRING(64),
@@ -21,6 +22,16 @@ module.exports = sequelize => {
       autoIncrement: false,
       comment: null,
       field: "title"
+    },
+    user_uid: {
+      type: DataTypes.STRING(45),
+      allowNull: false,
+      defaultValue: null,
+      primaryKey: true,
+      autoIncrement: false,
+      comment: null,
+      field: "user_uid",
+      unique: "user_uid_UNIQUE"
     }
   };
   const options = {

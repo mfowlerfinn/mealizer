@@ -17,17 +17,16 @@ async function getRecipe(req, res, next) {
 }
 
 async function getRecipeDB(req, res, next) {
-    let { id } = req.params
-    let recipe = await Recipes.getRecipeDB(id)
+    let { recipeUID, userUID } = req.params
+    let recipe = await Recipes.getRecipeDB(userUID, recipeUID)
     if (!recipe) return next()
-
+    
     res.json(recipe)
 }
 
 async function getRecipes(req, res, next) {
     let recipes = await Recipes.getAll()
     if (!recipes) return next()
-    console.log('recipes.length1', recipes.length)
     res.json(recipes)
 }
 

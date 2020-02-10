@@ -8,7 +8,7 @@ module.exports = sequelize => {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: null,
-      primaryKey: true,
+      primaryKey: false,
       autoIncrement: true,
       comment: null,
       field: "uid",
@@ -76,6 +76,16 @@ module.exports = sequelize => {
       autoIncrement: false,
       comment: null,
       field: "grocery_list"
+    },
+    user_uid: {
+      type: DataTypes.STRING(45),
+      allowNull: false,
+      defaultValue: null,
+      primaryKey: true,
+      autoIncrement: false,
+      comment: null,
+      field: "user_uid",
+      unique: "user_uid_UNIQUE"
     }
   };
   const options = {

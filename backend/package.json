@@ -1,8 +1,8 @@
 {
   "name": "mealizer-api",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
-  "description": "New Swagger API Project",
+  "description": "Mealizer API",
   "keywords": [],
   "author": "",
   "license": "",
@@ -21,7 +21,11 @@
   "devDependencies": {
     "sequelize-automate": "^1.2.0",
     "should": "^7.1.0",
-    "supertest": "^1.0.0"
+    "supertest": "^1.0.0",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^7.0.1",
+    "request": "^2.88.0"
   },
   "scripts": {
     "start": "node app.js",

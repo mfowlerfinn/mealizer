@@ -16,13 +16,17 @@ async function get(id) {
     }
 }
 
-async function getRecipeDB(id) {
-    return Recipe.findByPk(id)
+function getRecipeDB(userUID, recipeUID) {
+    return Recipe.findByPk(userUID, {
+            where: {
+                uid: recipeUID
+            }
+        })
         .then(recipe => {
             return recipe
         })
         .catch(err => {
-            return 'Error', err
+            return 'Error ' + err
         })    
 }
 
@@ -39,7 +43,7 @@ async function getAll() {
 function getRecipe(id) {
     let found = false
     for (let i = 0; i < recipes["recipes"].length; i++) {
-        if (id == i) {
+        if (id === i) {
             found = true
             return recipes["recipes"][i]
         }

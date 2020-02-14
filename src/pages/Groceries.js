@@ -5,29 +5,11 @@ import { IngredientLine } from "../components/IngredientLine";
 
 function Groceries() {
   const { menuObject, groceries } = useGlobalState();
-
-  // const GetItems = () => {
-  //   let len = menuObject.length;
-  //   return menuObject.map((meal, index) => {
-  //     let dayState = menuObject[index].planDay;
-  //     if (dayState === true) {
-  //       return (
-  //         <div className="recipe-ingredients">
-  //           ( {meal.title} ) (x{meal.servings}) {meal.ingredients}
-  //         </div>
-  //       );
-  //     } else return null;
-  //   });
-  // };
-
   const GetItems = () => {
     return groceries.map((item, index) => {
-
       return (
-        <div className="recipe-ingredients" key={index}>
+        <div className="ingredient-container" key={index}>
           {IngredientLine(item)}
-          {/* <div className="ingredient-pieces">{`${item.quantity} ${(item.unit != 'none') ? item.unit : ""} ${item.item}`}</div> */}
-          {/* <div className="ingredient-pieces">{`for ${dependantRecipes} recipe${recipes}`}</div> */}
         </div>
       );
     });
@@ -36,7 +18,7 @@ function Groceries() {
   return (
     <div>
       <MenuAppBar title={"Groceries"} />
-      <div className="day-container">
+      <div id="main-container">
         <GetItems />
       </div>
     </div>

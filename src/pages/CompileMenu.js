@@ -36,10 +36,12 @@ export default function CompileMenu() {
                 <div className="day-date">the {meal.dayOfMonth}</div>
                 <div className={dayState ? "day-options" : "hide"}>
                   <button onClick={() => replanMeal(index)}>Replan</button>
-                  <div className="day-date">({meal.servings})</div>
+                  <div className="serving">({meal.servings})</div>
+                  <button onClick={() => replanMeal(index)}>+</button>
+                  <button onClick={() => replanMeal(index)}>-</button>
                 </div>
               </div>
-
+              <div className="divider"></div>
               <div className={dayState ? "compile-card" : "hide"} id={index}>
                 <div className="recipe-title">{meal.title}</div>
                 <div className="recipe-subtitle">{meal.subtitle}</div>
@@ -81,8 +83,10 @@ export default function CompileMenu() {
   return (
     <Fragment>
       <MenuAppBar title={"Mealizer"} />
-      <OptionBar planMeals={planMeals} />
-      <CardConstructor />
+      <div id="main-container">
+        <OptionBar planMeals={planMeals} />
+        <CardConstructor />
+      </div>
     </Fragment>
   );
 }

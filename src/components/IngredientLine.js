@@ -1,9 +1,7 @@
 import React from "react";
 
-let i;
 
-export const IngredientLine = (ingredient, index) => {
-  i = index;
+export const IngredientLine = (ingredient) => {
   const show = key => {
     let exists = false;
 
@@ -24,7 +22,7 @@ export const IngredientLine = (ingredient, index) => {
   };
 
   return (
-    <div className="recipe-ingredients" >
+    <div className="recipe-ingredient" >
       {show("quantity")}
       {show("unit")}
       {show("item")}

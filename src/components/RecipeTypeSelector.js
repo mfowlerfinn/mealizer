@@ -14,7 +14,7 @@ export const RecipeTypeSelector = ({ setOutput }) => {
   } = useGlobalState();
     
   return (
-      <select name="type" id="type-select" onChange = {(e) => setOutput(e.target.value)}>
+      <select name="type" id="recipe-type-select" onChange = {(e) => setOutput(e.target.value)}>
       {/* <option value="">--Please choose an option--</option> */}
       {RECIPECODES.map((code, index) => {
         let selector = (index < 1) ? "selected" : "";

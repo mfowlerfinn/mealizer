@@ -10,9 +10,11 @@ const Recipes = () => {
         <div className="recipe-title">{recipe.title}</div>
         <div className="divider"></div>
         <div className="recipe-subtitle">{recipe.subtitle}</div>
+        <div className="ingredient-container">
         {recipe.ingredients.map((item) => {
           return IngredientLine(item);
         })}
+        </div>
         <div className="recipe-instructions">
           {recipe.procedures.map((item, index) => {
             return <div className="recipe-instruction" key={index} >{item}</div>;

@@ -1,3 +1,7 @@
+:root {
+  --color-primary: rgb(63, 81, 181);
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -38,8 +42,8 @@ code {
 }
 
 .day-options {
-  display: block;
-  flex-wrap: nowrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .compile-card {
@@ -102,4 +106,17 @@ code {
 
 .divider {
   border-top: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+button {
+  align-self: center;
+  border: 0.5px solid black;
+  background-color: white;
+  border-radius: 1em;
+  display: inline;
+}
+
+button:hover {
+  background-color: var(--color-primary);
+  color: white;
 }

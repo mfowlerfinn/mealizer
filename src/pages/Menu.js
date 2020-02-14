@@ -13,7 +13,8 @@ export default function Menu() {
         {menuObject.map((meal, index) => {
           let dayState = menuObject[index].planDay;
           return (
-            <div className="day-container" key={index}>
+            <>
+            <div className="day-container" >
               <div className="day-header">
                 <div className="day-title">{meal.dayName}</div>
                 <div className="day-date">the {meal.dayOfMonth}</div>
@@ -25,15 +26,15 @@ export default function Menu() {
               <div className={dayState ? "menu-card" : "hide"}>
                 <div className="recipe-title">{meal.title}</div>
                 <div className="recipe-subtitle">{meal.subtitle}</div>
-                {meal.ingredients.map( item => {
+                {meal.ingredients.map(item => {
                   return IngredientLine(item);
                 })}
-                {meal.procedures.map( item => {
-                  return <div className="recipe-instructions">{item}</div>
+                {meal.procedures.map(item => {
+                  return <div className="recipe-instructions">{item}</div>;
                 })}
-                
               </div>
             </div>
+            </>
           );
         })}
       </Fragment>

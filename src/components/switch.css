@@ -1,5 +1,9 @@
 /* The switch - the box around the slider */
 
+/* :root {
+  --color-primary: rgb(64, 81, 183);
+} */
+
 .switch {
   /* top: 0.2em; */
   /* align-self: center; */
@@ -47,7 +51,7 @@
 }
 
 input:checked + .slider {
-  background-color: #2196f3;
+  background-color: var(--color-primary);
 }
 
 input:focus + .slider {

@@ -11,7 +11,7 @@ import { useGlobalState } from "../context/LocalState";
 import { RecipeTypeSelector } from "./RecipeTypeSelector";
 import TextInput from "./TextInput";
 
-export default function OptionBar({ shuffle }) {
+export default function OptionBar({ planMeals }) {
   const {
     options,
     setOptions,
@@ -53,7 +53,7 @@ export default function OptionBar({ shuffle }) {
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Grid container justify="space-around">
-        <Button onClick={shuffle}>Plan {days} days!</Button>
+        <Button onClick={planMeals}>Plan {days} days!</Button>
         <KeyboardDatePicker
           margin="normal"
           id="date-picker-dialog"

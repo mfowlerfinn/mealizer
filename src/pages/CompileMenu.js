@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { useGlobalState } from "../context/LocalState";
 import Switch from "../components/Switch";
-import { PLAN_MEALS, DAY_IS_ACTIVE } from "../context/reducers";
+import { PLAN_MEALS, DAY_IS_ACTIVE, REPLACE_MEAL } from "../context/reducers";
 import { saveArrayToLocal } from "../static/Helpers";
 import MenuAppBar from "../components/MenuAppBar";
 import OptionBar from "../components/OptionBar";
@@ -11,6 +11,7 @@ export default function CompileMenu() {
 
   useEffect(() => {
     saveArrayToLocal(menuObject, "menu");
+    console.log(menuObject);
   }, [menuObject]);
 
   function handleSwitch(index) {
@@ -34,6 +35,7 @@ export default function CompileMenu() {
                 <div className="day-title">{meal.dayName}</div>
                 <div className="day-date">the {meal.dayOfMonth}</div>
                 <div className={dayState ? "day-options" : "hide"}>
+                  <button onClick={() => replanMeal(index)}>Replan</button>
                   <div className="day-date">({meal.servings})</div>
                 </div>
               </div>
@@ -51,10 +53,18 @@ export default function CompileMenu() {
   };
 
   const isMenuStored = () => {
-    if (!(menuObject.length > 0)) shuffle();
+    if (!(menuObject.length > 0)) planMeals();
   };
 
-  const shuffle = () => {
+  const replanMeal = mealIndex => {
+    setMenuObject({
+      type: REPLACE_MEAL,
+      mealType: options.mealType,
+      mealIndex: mealIndex
+    });
+  };
+
+  const planMeals = () => {
     setMenuObject({
       type: PLAN_MEALS,
       mealType: options.mealType,
@@ -71,7 +81,7 @@ export default function CompileMenu() {
   return (
     <Fragment>
       <MenuAppBar title={"Mealizer"} />
-      <OptionBar shuffle={shuffle} />
+      <OptionBar planMeals={planMeals} />
       <CardConstructor />
     </Fragment>
   );

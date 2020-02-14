@@ -1,13 +1,16 @@
 import React from "react";
 
-export const IngredientLine = ingredient => {
+let i;
+
+export const IngredientLine = (ingredient, index) => {
+  i = index;
   const show = key => {
     let exists = false;
 
     if (ingredient[key]) {
       let testString = ingredient[key].toString();
       if (testString.length > 0) {
-        if (testString != "none") {
+        if (testString !== "none") {
           exists = true;
         }
       }
@@ -21,7 +24,7 @@ export const IngredientLine = ingredient => {
   };
 
   return (
-    <div className="recipe-ingredients">
+    <div className="recipe-ingredients" >
       {show("quantity")}
       {show("unit")}
       {show("item")}

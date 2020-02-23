@@ -32,7 +32,9 @@ export default function recipe() {
       <MenuAppBar title={"Recipes"} />
       {/* <RecipeAddOptions /> */}
       {/* <RecipeInputForm /> */}
-      <RecipeList />
+      <div id="main-container">
+        <RecipeList />
+      </div>
     </div>
   );
 }

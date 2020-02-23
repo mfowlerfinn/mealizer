@@ -56,6 +56,6 @@ export const arrayOfRandomNumbers = (len, maxRange) => {
     getNumber(maxRange);
   }
 
-  console.log(arr);
+  // console.log(arr);
   return arr;
 };

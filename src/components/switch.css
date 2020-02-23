@@ -1,8 +1,6 @@
 /* The switch - the box around the slider */
 
 .switch {
-  /* top: 0.2em; */
-  /* align-self: center; */
   --switch-width: 2em;
   --switch-height: 0.8em;
   --slider-dot-size: 0.8; /* in percent of slider height */
@@ -11,7 +9,6 @@
   display: inline-block;
   min-width: var(--switch-width);
   height: var(--switch-height);
-  /* margin-top: 1em; */
 }
 
 /* Hide default HTML checkbox */
@@ -47,7 +44,7 @@
 }
 
 input:checked + .slider {
-  background-color: #2196f3;
+  background-color: var(--color-primary);
 }
 
 input:focus + .slider {

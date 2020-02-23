@@ -11,13 +11,8 @@ import { useGlobalState } from "../context/LocalState";
 import { RecipeTypeSelector } from "./RecipeTypeSelector";
 import TextInput from "./TextInput";
 
-export default function OptionBar({ shuffle }) {
-  const {
-    options,
-    setOptions,
-    menuObject,
-    setMenuObject
-  } = useGlobalState();
+export default function OptionBar({ planMeals }) {
+  const { options, setOptions, menuObject, setMenuObject } = useGlobalState();
 
   let weekLength = 7;
 
@@ -45,15 +40,17 @@ export default function OptionBar({ shuffle }) {
     setOptions({ days: days, startDate: startDate });
   }, [days]);
 
-  const handleMealType = (code) => {
+  const handleMealType = code => {
     // console.log(code);
-    setOptions({mealType: code});
-  }
+    setOptions({ mealType: code });
+  };
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <Grid container justify="space-around">
-        <Button onClick={shuffle}>Plan {days} days!</Button>
+      <div id="option-bar-container">
+        <button id="plan-button" onClick={planMeals}>
+          Plan {days} days!
+        </button>
         <KeyboardDatePicker
           margin="normal"
           id="date-picker-dialog"
@@ -76,10 +73,8 @@ export default function OptionBar({ shuffle }) {
             "aria-label": "change date"
           }}
         />
-
-        <TextInput />
-      </Grid>
-      <RecipeTypeSelector setOutput={handleMealType} />
+        <RecipeTypeSelector setOutput={handleMealType} />
+      </div>
     </MuiPickersUtilsProvider>
   );
 }

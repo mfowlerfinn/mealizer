@@ -15,6 +15,6 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 app.get('/api/recipes', api.getRecipes)
 app.get('/api/recipes/:id', api.getRecipe)
-app.get('/api/recipesDB/:userUID&:recipeUID', api.getRecipeDB)
+app.get('/api/recipesDB/users/:userUID/recipes/:recipeUID', api.getRecipeDB)
 
 app.listen(3000)

@@ -10,7 +10,7 @@ const api = require('./api.js')
 //db.sequelize.sync()
 const app = express()
 module.exports = app // for testing
-
+app.use(bodyParser.json())
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 app.get('/api/recipes', api.getRecipes)

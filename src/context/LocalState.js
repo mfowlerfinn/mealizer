@@ -52,10 +52,10 @@ function StateProvider({ children }) {
 
   const compileGroceryList = () => {
     let arr = [];
-    menuObject.map((meal, index) => {
+    menuObject.forEach((meal, index) => {
       let dayState = menuObject[index].planDay;
       if (dayState === true) {
-        meal.ingredients.map(item => {
+        meal.ingredients.forEach(item => {
           if (item.type === "ingredient") {
             let num, unit, name;
             let match = false;
@@ -91,6 +91,7 @@ function StateProvider({ children }) {
   useEffect(() => {
     console.log("recalc groceries now...");
     compileGroceryList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [menuObject]);
 
   return (

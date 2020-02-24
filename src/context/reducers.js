@@ -1,7 +1,5 @@
 import { arrayOfRandomNumbers } from "../static/Helpers";
 import Recipes from "../static/recipes.json";
-//import Data from "../static/data.json";
-import { stringToObj } from "../static/stringHelpers";
 
 import { add, format } from "date-fns";
 

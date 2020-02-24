@@ -7,7 +7,6 @@ export default function Menu() {
   const { menuObject } = useGlobalState();
 
   const GetMenu = () => {
-    let len = menuObject.length;
     return (
       <Fragment>
         {menuObject.map((meal, index) => {

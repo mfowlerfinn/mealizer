@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useGlobalState } from "../context/LocalState";
 import Switch from "../components/Switch";
 import { PLAN_MEALS, DAY_IS_ACTIVE, REPLACE_MEAL } from "../context/reducers";
@@ -37,8 +37,20 @@ export default function CompileMenu() {
                 <div className={dayState ? "day-options" : "hide"}>
                   <button onClick={() => replanMeal(index)}>Replan</button>
                   <div className="serving">({meal.servings})</div>
-                  <button onClick={() => console.log(`index ${index}, increase servings`)}>+</button>
-                  <button onClick={() => console.log(`index ${index}, decrease servings`)}>-</button>
+                  <button
+                    onClick={() =>
+                      console.log(`index ${index}, increase servings`)
+                    }
+                  >
+                    +
+                  </button>
+                  <button
+                    onClick={() =>
+                      console.log(`index ${index}, decrease servings`)
+                    }
+                  >
+                    -
+                  </button>
                 </div>
               </div>
               <div className="divider"></div>
@@ -78,6 +90,7 @@ export default function CompileMenu() {
 
   useEffect(() => {
     isMenuStored();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

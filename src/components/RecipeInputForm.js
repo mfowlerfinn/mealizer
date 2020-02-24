@@ -4,10 +4,6 @@ import "./RecipeInputForm.css";
 const categories = ["main", "side", "dessert", "bread", "drink", "appetizer"];
 
 export const RecipeInputForm = () => {
-  const [newRecipe, setNewRecipe] = React.useState();
-
-
-  
   return (
     <div >
       <form className="main-form compile-card">

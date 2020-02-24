@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
-import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from "@date-io/date-fns";
-import Button from "@material-ui/core/Button";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker
@@ -9,10 +7,9 @@ import {
 import { startOfToday, addDays, differenceInDays } from "date-fns";
 import { useGlobalState } from "../context/LocalState";
 import { RecipeTypeSelector } from "./RecipeTypeSelector";
-import TextInput from "./TextInput";
 
 export default function OptionBar({ planMeals }) {
-  const { options, setOptions, menuObject, setMenuObject } = useGlobalState();
+  const { setOptions} = useGlobalState();
 
   let weekLength = 7;
 
@@ -22,7 +19,6 @@ export default function OptionBar({ planMeals }) {
   const [startDate, setStartDate] = React.useState(today);
   const [endDate, setEndDate] = React.useState(endDay);
   const [days, setDays] = React.useState(weekLength);
-  const [servings, setServings] = React.useState(2);
 
   const handleStartDateChange = date => {
     setStartDate(date);
@@ -38,7 +34,7 @@ export default function OptionBar({ planMeals }) {
 
   useEffect(() => {
     setOptions({ days: days, startDate: startDate });
-  }, [days]);
+  }, [days, startDate, setOptions]);
 
   const handleMealType = code => {
     // console.log(code);

@@ -1,2 +1,2 @@
 - [] single meal function needs to check for duplicate meals
-- [] why does day & date of meal change if duplicates occur?
+- [x] why does day & date of meal change if duplicates occur?

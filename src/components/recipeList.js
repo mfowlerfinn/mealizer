@@ -3,7 +3,6 @@ import RecipeData from "../static/recipes.json";
 import { IngredientLine } from "./IngredientLine";
 
 const Recipes = () => {
-  let n = 0;
   return RecipeData.map((recipe, i) => {
     return (
       <div className="day-container" key={i}>

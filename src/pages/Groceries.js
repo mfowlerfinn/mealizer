@@ -4,7 +4,7 @@ import { useGlobalState } from "../context/LocalState";
 import { IngredientLine } from "../components/IngredientLine";
 
 function Groceries() {
-  const { menuObject, groceries } = useGlobalState();
+  const { groceries } = useGlobalState();
   const GetItems = () => {
     return groceries.map((item, index) => {
       return (

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Menu from "./pages/Menu";
 import CompileMenu from "./pages/CompileMenu";
 import Recipe from "./pages/Recipe";

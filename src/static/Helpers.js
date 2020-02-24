@@ -38,7 +38,7 @@ export const arrayOfRandomNumbers = (len, maxRange) => {
 
     const checkForDuplicate = () => {
       let duplicate = false;
-      arr.map((num, index) => {
+      arr.forEach((num, index) => {
         if (num === result) duplicate = true;
       });
       if (duplicate === false) {

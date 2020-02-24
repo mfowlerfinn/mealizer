@@ -14,6 +14,7 @@ module.exports = app // for testing
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 app.get('/api/recipes', api.getRecipes)
+app.get('/api/test', api.testDB)
 app.get('/api/recipes/:id', api.getRecipe)
 app.get('/api/recipesDB/:userUID&:recipeUID', api.getRecipeDB)
 

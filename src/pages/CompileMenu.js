@@ -37,8 +37,8 @@ export default function CompileMenu() {
                 <div className={dayState ? "day-options" : "hide"}>
                   <button onClick={() => replanMeal(index)}>Replan</button>
                   <div className="serving">({meal.servings})</div>
-                  <button onClick={() => replanMeal(index)}>+</button>
-                  <button onClick={() => replanMeal(index)}>-</button>
+                  <button onClick={() => console.log(`index ${index}, increase servings`)}>+</button>
+                  <button onClick={() => console.log(`index ${index}, decrease servings`)}>-</button>
                 </div>
               </div>
               <div className="divider"></div>

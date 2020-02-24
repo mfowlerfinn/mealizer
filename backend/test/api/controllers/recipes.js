@@ -66,12 +66,12 @@ describe('controllers', function() {
         }
         request(server)
         
-          .get(`/api/recipesDB/${userUID}&${recipeUID}`)
+          .get(`/api/recipesDB/users/${userUID}/recipes/${recipeUID}`)
           .set('Accept', 'application/json')
           .expect('Content-Type', /json/)
           .expect(200)
-          .end(function(err, res) {
-            should.not.exist(err);            
+          .end(function(err, res) {    
+            should.not.exist(err);    
             res.body.should.eql(testRecipe);
             done();
           });

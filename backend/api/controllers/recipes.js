@@ -17,9 +17,9 @@ async function get(id) {
 }
 
 function getRecipeDB(userUID, recipeUID) {
-    return Recipe.findByPk(userUID, {
+    return Recipe.findByPk(recipeUID, {
             where: {
-                uid: recipeUID
+                user_uid: userUID
             }
         })
         .then(recipe => {
